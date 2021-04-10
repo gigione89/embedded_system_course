@@ -24,9 +24,12 @@
 /* Add Your Declarations and Function Comments here */ 
 void print_statistics(unsigned char vector[], int size);
 float find_median(unsigned char vector[], int size);
-float find_max(unsigned char vector[], int size);
-float find_min(unsigned char vector[], int size);
+int find_max(unsigned char vector[], int size);
+int find_min(unsigned char vector[], int size);
 float find_avg(unsigned char vector[], int size);
+void print_array(unsigned char arr[],int size);
+void sort_array(unsigned char arr[],int size);
+void quicksort(unsigned char arr[],int primo,int ultimo);
 /**
  * @brief <Add Brief Description of Function Here>
  *

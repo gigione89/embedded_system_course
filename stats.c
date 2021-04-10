@@ -39,14 +39,14 @@ void main() {
   /* Other Variable Declarations Go Here */
   /* Statistics and Printing Functions Go Here */
   print_statistics(test,SIZE);
-  median=find_median(test,SIZE);
+  sort_array(test,SIZE);
 
 }
 
 void print_statistics(unsigned char vector[], int size){
-	int i, temp;
-	float max=0, min=0, avg=0, total=0, median=0;
-	for (i=0;i<size;i++){
+	int i, temp, max, min;
+	float  avg=0, median=0;
+	/*for (i=0;i<size;i++){
 		//double temp = strtod(vector[i],NULL);
 		temp=vector[i];
   		float ftemp = (float)temp;
@@ -65,8 +65,57 @@ void print_statistics(unsigned char vector[], int size){
   		total+=ftemp;	
 	}
 	avg=total/size;
-	printf("Average is %f, Maximum is %f,  Minimum is %f, Median is %f", avg, max, min, median);
+	*/
+	median=find_median(vector, size);
+	avg=find_avg(vector,size);
+	min=find_min(vector,size);
+	max=find_max(vector,size);
+	printf("Average is %f, Maximum is %d,  Minimum is %d, Median is %f", avg, max, min, median);
 	
+}
+
+void print_array(unsigned char arr[],int size)
+{
+	printf("\nThe array is:\n");
+	for(int i=0;i<size;i++){
+		printf("%d\t", arr[i]);
+	}		
+}
+void sort_array(unsigned char arr[],int size)
+{
+	unsigned char temp[size];
+	for(int i=0;i<size;i++){
+		temp[i]=arr[i];
+	}
+	quicksort(temp, 0, size - 1);
+	print_array(temp,size);
+}
+void quicksort(unsigned char arr[],int primo,int ultimo)
+{
+int temp, pivot;
+     if(primo<ultimo){
+      pivot=primo;
+      int i=primo;
+      int j=ultimo;     
+      
+      while(i<j){
+         while(arr[i]<=arr[pivot]&&i<ultimo)
+            i++;
+         while(arr[j]>arr[pivot])
+            j--;
+         if(i<j){   
+            temp=arr[i];
+            arr[i]=arr[j];
+            arr[j]=temp;
+         }
+      }
+
+      temp=arr[pivot];
+      arr[pivot]=arr[j];
+      arr[j]=temp;
+      quicksort(arr,primo,j-1);
+      quicksort(arr,j+1,ultimo);
+   }
 }
 
 float find_median(unsigned char vector[], int size){
@@ -87,23 +136,23 @@ float find_median(unsigned char vector[], int size){
 	return median;
 }
 
-float find_max(unsigned char vector[], int size){
-	float max=0;
+int find_max(unsigned char vector[], int size){
+	int max=0;
 	int i;
 	for (i=0;i<size;i++){
 		//double temp = strtod(vector[i],NULL);
-  		float ftemp = (float)vector[i];
+  		int ftemp = (int)vector[i];
   		if (ftemp>max) max=ftemp;	
 	}
 	return max;
 }
 
-float find_min(unsigned char vector[], int size){
-	float min=0;
+int find_min(unsigned char vector[], int size){
+	int min=0;
 	int i;
 	for (i=0;i<size;i++){
 		//double temp = strtod(vector[i],NULL);
-  		float ftemp = (float)vector[i];
+  		int ftemp = (int)vector[i];
   		if (ftemp<min) min=ftemp;
 	}
 	return min;
